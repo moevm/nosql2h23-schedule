@@ -1,0 +1,163 @@
+User1:
+{
+	“_id”: ObjectId("User1Id"),
+	“full_name”: “Деткова Анна Сергеевна”,
+	“role”: 2,
+	“email”: “test@gmail.com”,
+	“password”: “************”,
+
+	“department”: “AM”,
+	“wish”: [{
+                 “_id”: ObjectId("Wish1Id"),
+                 “id_admin”: null,
+                  “id_chain”: ObjectId("Chain1Id"),
+                  “wish_text”: “Хачу питсу”,  
+                  “date”: ISODate("2023-12-12T00:00:00Z"),
+                  “enum_status” : 0
+                 }
+                ],
+	“subject”: [“МатАнал”, 
+    		”Дискретная математика”, 
+    		“Вычислительная математика“
+		   ]
+	“working_hours”: [
+       		{
+           	“week_day”: 0
+           	“time”: 1
+       		},
+       		{
+        	“week_day”: 0
+           	“time”: 2
+       		}
+	   ]
+}
+
+User2:
+{
+	“_id”: ObjectId("User2Id"),
+	“full_name”: “Литягин Семен Михайлович”,
+	“role”: 0,
+	“email”: “test@gmail.com”,
+	“password”: “**********”,
+	
+	“department”: “”,
+	“wish”: [],
+	“subject”: []
+	“working_hours”: []
+}
+
+
+Chain1:
+{
+	“_id”: ObjectId("Chain1Id"),
+	“week_day”: 0
+	“time”: 1
+	“group”: “0382”,
+	“flow_groups”: [“0383”, “0384”],
+	“classroom”: “5427”,
+	“teacher”: “Деткова Анна Сергеевна”
+	“subject”:  “МатАнал”
+}
+
+Chain2:
+{
+	“_id”: ObjectId("Chain2Id"),
+	“week_day”: 0
+	“time”: 1
+	“group”: “0383”,
+	“flow_groups”: [“0382”, “0384”],
+	“classroom”: “5427”
+	“teacher”: “Деткова Анна Сергеевна”
+	“subject”:  “МатАнал”
+}
+
+
+Faculty:
+{
+	“_id”: ObjectId("Faculty1Id"),
+	“name”: “ФКТИ”,
+	“specializations”:
+   	[
+       	{
+        	“_id”: ObjectId(),
+           	“title”: “ПМИ”,
+           	“subjects”: 
+                [
+                {
+                	“_id”: ObjectId(),
+                        “title”: “Математический анализ”,
+                        “short_title”: “МатАнал”,
+                        “score_units”: 2,
+                        “hours”: 192
+                },
+                {
+                        “_id”: ObjectId(),
+                        “title”: “Теория вероятности и математическая статистика”,
+                        “short_title”: “ТВиМС”,
+                        “score_units”: 2,
+                        “hours”: 192
+                }
+                ],
+            	“groups”: 
+                [
+                {
+                      “_id”: ObjectId(),
+                      “number”: “0381”,
+                      “amount”: 25,
+                      “course”: 4
+                 },
+                 {
+                       “_id”: ObjectId(),
+                       “number”: “1382”,
+                       “amount”: 28,
+                       “course”: 3
+                 }
+                 ]
+        }
+   	]
+}
+
+
+Classroom:
+{
+	“_id”: ObjectId("Classroom1Id"),
+	  “capacity”: 170,
+	  “number”: 5427
+}
+
+
+Log_sheldule_generation:
+{
+	“_id”: ObjectId("Log_sheldule_generation1Id"),
+	“email”: “test@gmail.com”,
+    	“generation_date”: ISODate("2023-09-01T00:00:00Z")
+}
+
+
+Log_study_plan:
+{
+    	“_id”: ObjectId("Log_study_plan1Id"),
+    	“faculty”: “ФКТИ”,
+    	“email”: “test@gmail.com”,
+    	“date”: ISODate("2023-08-31T00:00:00Z"),
+    	“file_title”: “30_08_2023_FKTI.json”
+}
+
+
+Log_chain:
+{
+    	“_id”: ObjectId("Log_chain1Id"),
+    	“week_day”: 0,
+    	“time”: 1,
+    	“group”: 0382,
+    	“before”: “sМатАнал_c5427”,
+    	“after”: “sСтатАнал_c3308”,
+    	“email”: “test@gmail.com”,
+    	“date”: ISODate("2023-10-24T00:00:00Z")
+}
+
+
+
+
+
+
