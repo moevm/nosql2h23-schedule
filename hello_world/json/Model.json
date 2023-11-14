@@ -2,7 +2,7 @@ User1:
 {
 	“_id”: ObjectId("User1Id"),
 	“full_name”: “Деткова Анна Сергеевна”,
-	“role”: 2,
+	“role”: "TEACHER",
 	“email”: “test@gmail.com”,
 	“password”: “************”,
 
@@ -13,7 +13,7 @@ User1:
                   “id_chain”: ObjectId("Chain1Id"),
                   “wish_text”: “Хачу питсу”,  
                   “date”: ISODate("2023-12-12T00:00:00Z"),
-                  “enum_status” : 0
+                  “enum_status” : "CREATED"
                  }
                 ],
 	“subject”: [“МатАнал”, 
@@ -22,12 +22,12 @@ User1:
 		   ]
 	“working_hours”: [
        		{
-           	“week_day”: 0
-           	“time”: 1
+           	“week_day”: “MON”,
+           	“time”: “8:00-9:30”
        		},
        		{
-        	“week_day”: 0
-           	“time”: 2
+           	“week_day”: “MON”,
+           	“time”: “9:50-11:20”
        		}
 	   ]
 }
@@ -36,7 +36,7 @@ User2:
 {
 	“_id”: ObjectId("User2Id"),
 	“full_name”: “Литягин Семен Михайлович”,
-	“role”: 0,
+	“role”: "ADMIN",
 	“email”: “test@gmail.com”,
 	“password”: “**********”,
 	
@@ -50,8 +50,8 @@ User2:
 Chain1:
 {
 	“_id”: ObjectId("Chain1Id"),
-	“week_day”: 0
-	“time”: 1
+	“week_day”: “MON”,
+	“time”: “11:40-13:10”,
 	“group”: “0382”,
 	“flow_groups”: [“0383”, “0384”],
 	“classroom”: “5427”,
@@ -62,8 +62,8 @@ Chain1:
 Chain2:
 {
 	“_id”: ObjectId("Chain2Id"),
-	“week_day”: 0
-	“time”: 1
+	“week_day”: “MON”,
+	“time”: “11:40-13:10”,
 	“group”: “0383”,
 	“flow_groups”: [“0382”, “0384”],
 	“classroom”: “5427”
@@ -81,6 +81,7 @@ Faculty:
        	{
         	“_id”: ObjectId(),
            	“title”: “ПМИ”,
+		“department: “МОЭВМ”,
            	“subjects”: 
                 [
                 {
@@ -147,11 +148,21 @@ Log_study_plan:
 Log_chain:
 {
     	“_id”: ObjectId("Log_chain1Id"),
-    	“week_day”: 0,
-    	“time”: 1,
+    	“week_day”:  “MON”,
+    	“time”: “8:00-9:30”,
     	“group”: 0382,
-    	“before”: “sМатАнал_c5427”,
-    	“after”: “sСтатАнал_c3308”,
+    	“before”:
+    	{
+        	“before_subject”: “МатАнал”,
+        	“before_classroom”: 3302,
+        	“before_teacher”: “Иванов И. И.”
+     	},
+    	“after”:
+    	{
+        	“after_subject”: “СтатАнал”,
+        	“after_classroom”: 3308,
+       		“after_teacher”: “Петров П. П.”
+     	},
     	“email”: “test@gmail.com”,
     	“date”: ISODate("2023-10-24T00:00:00Z")
 }
