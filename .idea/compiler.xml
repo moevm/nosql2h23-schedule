@@ -12,7 +12,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="nosql2h23-schedule" target="19" />
-      <module name="nosql2h23schedule" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
