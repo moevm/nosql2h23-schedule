@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.hibernate.validator.constraints.UUID;
 
-import java.util.UUID;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Group {
+@NoArgsConstructor
+public class Faculty {
     @Id
     private UUID id;
-    private String groupNumber;
-    private int amount;
-    private int course;
+    private String facultyName;
+    private List<Spesialization> spesializations;
 }
