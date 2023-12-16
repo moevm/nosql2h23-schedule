@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
