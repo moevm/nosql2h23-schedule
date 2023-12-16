@@ -16,12 +16,5 @@ public class HelloWorldController {
     public HelloWorldController(HelloWorldService helloWorldService) {
         this.helloWorldService = helloWorldService;
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<HelloWorldDto> getHelloWorldById(@PathVariable String id) {
-        return ResponseEntity.ok(helloWorldService.getHelloWorld(id));
-    }
-    @PostMapping("/addHelloWorld")
-    public ResponseEntity<User> setHelloWorld() {
-        return ResponseEntity.ok(helloWorldService.addHelloWorld());
-    }
+
 }

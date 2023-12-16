@@ -4,18 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
-import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Wish {
+public class Chain {
+    @UUID
     private UUID id;
-    private UUID idAdmin;
-    private UUID idChain;
-    private String wishText;
-    private Date date;
-    private String status;
+    private String weekDay;
+    private String time;
+    private Group group;
+    private List<Group> flowGroups;
+    private String classroom;
+    private String teacher;
+    private Subject subject;
 }
