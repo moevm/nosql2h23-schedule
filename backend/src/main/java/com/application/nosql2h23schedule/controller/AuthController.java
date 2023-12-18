@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/schedule/auth")
 public class AuthController {
@@ -30,8 +30,8 @@ public class AuthController {
         return ResponseEntity.ok(authService.registerUser(registerRequest));
     }
 
-    @GetMapping("/smth")
-    public ResponseEntity<String> smth(){
-        return ResponseEntity.ok("OKEY");
+    @GetMapping("/sayHello")
+    public ResponseEntity<String> sayHello(){
+        return ResponseEntity.ok("NOT OKAY");
     }
 }
