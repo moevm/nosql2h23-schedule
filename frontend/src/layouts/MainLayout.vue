@@ -36,6 +36,7 @@
           <div class="spacer my-4">dddd</div>
           <v-btn
             block
+            @click="logout"
           >
             Logout
           </v-btn>
@@ -53,6 +54,12 @@
     setup
     lang="ts"
 >
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+const logout = () => {
+  router.push({name: 'auth'});
+}
 </script>
 
 <style scoped>
