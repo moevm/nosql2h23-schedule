@@ -1,6 +1,9 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/schedule
+#      for local work
+#      uri: mongodb://localhost:27017/schedule
+#      for docker
+      uri: mongodb://mongodb/schedule
 
 jwt_secret: SECRET
