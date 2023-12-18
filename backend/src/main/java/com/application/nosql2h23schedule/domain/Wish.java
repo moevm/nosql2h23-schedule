@@ -1,9 +1,9 @@
-package com.application.nosql2h23scheldule.domain;
+package com.application.nosql2h23schedule.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UUID;
+import org.bson.types.ObjectId;
 
 import java.util.Date;
 
@@ -11,9 +11,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Wish {
-    private UUID id;
-    private UUID idAdmin;
-    private UUID idChain;
+    private ObjectId id;
+    private ObjectId idAdmin;
+    private ObjectId idChain;
     private String wishText;
     private Date date;
     private String status;

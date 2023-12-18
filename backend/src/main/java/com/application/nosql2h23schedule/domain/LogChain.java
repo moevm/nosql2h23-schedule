@@ -1,19 +1,19 @@
-package com.application.nosql2h23scheldule.domain;
+package com.application.nosql2h23schedule.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogChain {
-    @Id
-    private UUID id;
+    @MongoId
+    private ObjectId id;
     private String weekDay;
     private String time;
     private Group group;
