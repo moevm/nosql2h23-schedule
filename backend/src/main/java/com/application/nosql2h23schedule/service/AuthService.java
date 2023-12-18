@@ -46,7 +46,7 @@ public class AuthService {
         try {
             authenticationManager.authenticate(authInputToken);
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Неверный пароль");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Неверный пароль");
         }
 
         String token = jwtUtil.generateToken(authRequest.getEmail());
@@ -70,7 +70,7 @@ public class AuthService {
         user.setRole("ROLE_ADMIN");
 
         if (userRepository.findUserByEmail(user.getEmail()).isPresent())
-            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "Пользователь с таким email уже существует.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Пользователь с таким email уже существует.");
 
         userRepository.save(user);
 
