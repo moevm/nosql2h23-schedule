@@ -53,6 +53,7 @@ class Auth {
           this.profile.setUserInfo(response.data.role, response.data.fullName);
           localStorage.setItem(LocalStorageKeys.FIO_KEY, response.data.fullName);
           localStorage.setItem(LocalStorageKeys.ROLE_KEY, response.data.role);
+          localStorage.setItem(LocalStorageKeys.USERNAME_KEY, response.data.email);
 
           this.updateTokens(
             response.data.token_access,
