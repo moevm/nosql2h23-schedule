@@ -29,7 +29,7 @@ public class AuthUserDetailService implements UserDetailsService {
         Optional<User> user = userRepository.findUserByEmail(email);
 
         if (user.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователя с таким email не существует");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Пользователя с таким email не существует");
 
         return new UserDomainDetails(user.get());
     }

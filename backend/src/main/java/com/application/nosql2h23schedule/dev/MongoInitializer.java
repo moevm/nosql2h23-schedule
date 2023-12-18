@@ -3,10 +3,15 @@ package com.application.nosql2h23schedule.dev;
 import com.application.nosql2h23schedule.domain.Chain;
 import com.application.nosql2h23schedule.domain.Group;
 import com.application.nosql2h23schedule.domain.Subject;
+import com.application.nosql2h23schedule.domain.User;
 import com.application.nosql2h23schedule.repository.ChainRepository;
+import com.application.nosql2h23schedule.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,13 +21,29 @@ import java.util.List;
 public class MongoInitializer {
 
     private final ChainRepository chainRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MongoInitializer(ChainRepository chainRepository) {
+    public MongoInitializer(ChainRepository chainRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.chainRepository = chainRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
         init();
     }
+
     private void init() {
+
+        User user = new User();
+        user.setEmail("testuser");
+        user.setPassword(passwordEncoder.encode("1"));
+        user.setFullName("Test User FullName");
+        user.setRole("ROLE_ADMIN");
+
+        if (userRepository.findUserByEmail(user.getEmail()).isPresent())
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Пользователь с таким email уже существует.");
+
+        userRepository.save(user);
 
         Group group0382 = new Group();
         group0382.setId(ObjectId.get());
