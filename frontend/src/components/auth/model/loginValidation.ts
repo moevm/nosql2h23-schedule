@@ -11,7 +11,7 @@ export const useMinLengthStringValidation = (
 ) => (value: string) => value.length >= options.minLength || options.message;
 
 const loginValidationRules = {
-    login: [
+    email: [
         useRequiredValidation({ message: 'Логин - обязательное поле' }),
         useMinLengthStringValidation({
             message: 'Логин должен быть длиннее 6 символов',

@@ -1,9 +1,9 @@
 class LoginData {
-    username = '';
+    email = '';
 
     password = '';
 
-    isContainsValues = () => !!this.username && !!this.password;
+    isContainsValues = () => !!this.email && !!this.password;
 }
 
 export default LoginData;

@@ -9,11 +9,10 @@
           @submit.prevent="onClickSubmitLogin"
       >
         <v-text-field
-            v-model="loginInputData.username"
-            :rules="loginValidationRules.login"
+            v-model="loginInputData.email"
+            :rules="loginValidationRules.email"
             autocomplete="username"
             clearable
-            data-testid="login"
             label="Логин"
             variant="underlined"
         />
@@ -23,7 +22,6 @@
             :rules="loginValidationRules.password"
             :type="showPassword ? 'text' : 'password'"
             autocomplete="current-password"
-            data-testid="password"
             label="Пароль"
             variant="underlined"
             @click:append="onClickToggleShowPassword"
@@ -51,23 +49,28 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import type { VForm } from 'vuetify/components';
+import type { VForm } from 'vuetify';
 import loginValidationRules from '@/components/auth/model/loginValidation';
 import LoginData from '@/components/auth/model/loginData';
+import auth from '@/components/auth/api/Auth';
 
 const emit = defineEmits(['login-success']);
 
 const showPassword = ref(false);
 const loginFormRef = ref<VForm | null>(null);
 const loginInputData = reactive(new LoginData());
-const isLoginLoading = ref(false);
-// let statusMsg = reactive({ message: '' });
 
 const onClickToggleShowPassword = () => {
   showPassword.value = !showPassword.value;
 };
 
 const onClickSubmitLogin = async () => {
-  emit('login-success');
+  await auth.sendLoginData(loginInputData)
+      .then(() => {
+        emit('login-success');
+      })
+      .catch((resStatus) => {
+        console.log(resStatus)
+      });
 };
 </script>
