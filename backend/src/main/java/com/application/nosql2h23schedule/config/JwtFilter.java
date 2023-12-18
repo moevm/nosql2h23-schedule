@@ -1,7 +1,6 @@
 package com.application.nosql2h23schedule.config;
 
 import com.application.nosql2h23schedule.security.JwtUtil;
-import com.application.nosql2h23schedule.security.UserDomainDetails;
 import com.application.nosql2h23schedule.service.AuthUserDetailService;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Autowired;
