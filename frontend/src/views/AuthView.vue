@@ -1,5 +1,5 @@
 <template>
-  <div class="auth">
+  <div class="auth fill-height">
     <v-container class="d-flex fill-height">
       <v-row>
         <v-spacer />
