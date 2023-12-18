@@ -1,4 +1,4 @@
-package com.application.nosql2h23scheldule.domain;
+package com.application.nosql2h23schedule.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

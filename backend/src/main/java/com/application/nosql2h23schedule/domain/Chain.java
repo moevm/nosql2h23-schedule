@@ -1,9 +1,10 @@
-package com.application.nosql2h23scheldule.domain;
+package com.application.nosql2h23schedule.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UUID;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 
@@ -11,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Chain {
-    @UUID
-    private UUID id;
+    @MongoId
+    private ObjectId id;
     private String weekDay;
     private String time;
     private Group group;
