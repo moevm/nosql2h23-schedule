@@ -2,8 +2,9 @@
   <v-layout class="rounded rounded-md">
     <v-app-bar
         :elevation="0"
+        class="bottom-bordered"
     >
-      <div class="logo ml-16">
+      <div class="logo ml-4">
         <img src="src/assets/full-logo.svg" alt="logo"/>
       </div>
     </v-app-bar>
@@ -16,30 +17,40 @@
         <v-list-item
             title="Sandra Adams"
             subtitle="sandra_a88@gmailcom"
+            class="px-3 py-4"
         >
           <template v-slot:prepend>
-            <v-icon icon="account-circle-outline"></v-icon>
+            <v-icon
+                icon="mdi-account-circle-outline"
+                size="x-large"
+                color="#2962FF"
+            ></v-icon>
           </template>
         </v-list-item>
       </v-list>
 
       <v-divider></v-divider>
 
-      <v-list density="compact">
-        <v-list-item prepend-icon="mdi-folder" title="My Files"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me"></v-list-item>
-        <v-list-item prepend-icon="mdi-star" title="Starred"></v-list-item>
+      <v-list density="compact" nav>
+        <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
+        <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
+        <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
       </v-list>
 
       <template v-slot:append>
-        <div class="pa-2 ma-4 d-flex flex-column">
-          <div class="spacer my-4">dddd</div>
-          <v-btn
-            block
-            @click="logout"
+        <div class="d-flex flex-column mb-4">
+          <v-list-item
+              rounded
+              title="Выйти"
+              @click="logout"
           >
-            Logout
-          </v-btn>
+            <template v-slot:prepend>
+              <v-icon
+                  icon="mdi-logout"
+                  color="#2962FF"
+              ></v-icon>
+            </template>
+          </v-list-item>
         </div>
       </template>
     </v-navigation-drawer>
@@ -63,5 +74,7 @@ const logout = () => {
 </script>
 
 <style scoped>
-
+.bottom-bordered{
+  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
+}
 </style>
