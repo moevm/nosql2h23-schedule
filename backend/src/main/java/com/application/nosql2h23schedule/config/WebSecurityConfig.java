@@ -45,6 +45,7 @@ public class WebSecurityConfig {
 //                        .antMatchers("/project/admin/*").hasRole("ADMIN")
                         .antMatchers("/schedule/auth/login").permitAll()
                         .antMatchers("/schedule/auth/register").permitAll()
+                        .antMatchers("/schedule/admin/*").hasRole("ADMIN")
                         .anyRequest().hasAnyRole("ADMIN")
                         .and()
                         .formLogin().loginPage("/schedule/auth/login")

@@ -17,6 +17,7 @@ public class Chain {
     private String weekDay;
     private String time;
     private Group group;
+    private String faculty;
     private List<Group> flowGroups;
     private String classroom;
     private String teacher;
