@@ -15,4 +15,5 @@ public class Group {
     private String groupNumber;
     private int amount;
     private int course;
+    private String faculty;
 }

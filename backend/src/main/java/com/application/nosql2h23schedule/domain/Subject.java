@@ -10,8 +10,6 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Subject {
-    @MongoId
-    private ObjectId id;
     private String subjectTitle;
     private String shortSubjectTitle;
     private int scoreUnits;
