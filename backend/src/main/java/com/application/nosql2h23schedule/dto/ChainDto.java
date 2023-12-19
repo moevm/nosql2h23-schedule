@@ -14,11 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChainDto {
-    private ObjectId id;
-    private String weekDay;
-    private String time;
-    private String groupNumber;
-    private List<Group> flowGroups;
+    private String id;
     private String classroom;
     private String teacher;
     private String subjectTitle;
