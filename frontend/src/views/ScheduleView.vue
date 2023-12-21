@@ -4,7 +4,10 @@
       <div class="controls-row d-flex">
         <div class="table-header font-weight-bold mt-8 ml-2 text-h4" style="letter-spacing: 1.28px;">Расписание</div>
       </div>
-      <ScheduleTable/>
+      <div class="schedule-table pr-5">
+        <ScheduleTable/>
+      </div>
+
     </div>
 
   </div>
