@@ -37,18 +37,39 @@ public class MongoInitializer {
     }
 
     private void init() {
-        initTestUSer();
+        initTestUsers();
         init4CourseFKTI();
+        initGroups();
     }
 
-    private void initTestUSer() {
-        User user = new User();
-        user.setEmail("testuser");
-        user.setPassword(passwordEncoder.encode("1"));
-        user.setFullName("Test User FullName");
-        user.setRole("ROLE_ADMIN");
+    private void initGroups() {
+        groupRepository.save(new Group(null, "1111", 0, 3, "ФРТ"));
+        groupRepository.save(new Group(null, "1101", 0, 3, "ФРТ"));
+        groupRepository.save(new Group(null, "1102", 0, 3, "ФРТ"));
+        groupRepository.save(new Group(null, "1191", 0, 3, "ФРТ"));
+        groupRepository.save(new Group(null, "1105", 0, 3, "ФРТ"));
 
+        groupRepository.save(new Group(null, "1381", 0, 3, "ФКТИ"));
+        groupRepository.save(new Group(null, "1382", 0, 3, "ФКТИ"));
+        groupRepository.save(new Group(null, "1383", 0, 3, "ФКТИ"));
+        groupRepository.save(new Group(null, "1303", 0, 3, "ФКТИ"));
+        groupRepository.save(new Group(null, "1304", 0, 3, "ФКТИ"));
+    }
+
+    private void initTestUsers() {
+        User user = new User();
+        user.setEmail("ivanov@gmail.com");
+        user.setPassword(passwordEncoder.encode("1"));
+        user.setFullName("Иванов И.С.");
+        user.setRole("ROLE_ADMIN");
         userRepository.save(user);
+
+        User user2 = new User();
+        user2.setEmail("testuser");
+        user2.setPassword(passwordEncoder.encode("1"));
+        user2.setFullName("test test test");
+        user2.setRole("ROLE_ADMIN");
+        userRepository.save(user2);
     }
 
     private void init4CourseFKTI() {
@@ -106,6 +127,12 @@ public class MongoInitializer {
         Subject subjectMarketPract = new Subject();
         subjectMarketPract.setShortSubjectTitle("пр. Маркетинг");
 
+        Subject subjectPRCMI = new Subject();
+        subjectPRCMI.setShortSubjectTitle("лек. ПрЧМИ");
+
+        Subject subjectPRCMIPract = new Subject();
+        subjectPRCMIPract.setShortSubjectTitle("пр. ПрЧМИ");
+
         List<String> dayOfWeek = new ArrayList<>(Arrays.asList(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
         List<String> time = new ArrayList<>(Arrays.asList(FIRST_PAIR, SECOND_PAIR, THIRD_PAIR,
                 FORTH_PAIR, FIFTH_PAIR, SIXTH_PAIR));
@@ -128,8 +155,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5134");
+            chain.setClassroom("5135");
             chain.setSubject(subjectBZDLab);
+            chain.setTeacher("Борискина А.В.");
             chainRepository.save(chain);
         }
 
@@ -138,8 +166,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5425");
+            chain.setClassroom("5423");
             chain.setSubject(subjectBZD);
+            chain.setTeacher("Иванов А.Н.");
             chainRepository.save(chain);
         }
 
@@ -148,8 +177,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5423");
+            chain.setClassroom("5230");
             chain.setSubject(subjectNoSQL);
+            chain.setTeacher("Заславский М.М.");
             chainRepository.save(chain);
         }
 
@@ -158,8 +188,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5423");
+            chain.setClassroom("5230");
             chain.setSubject(subjectOPNP);
+            chain.setTeacher("Заславский М.М.");
             chainRepository.save(chain);
         }
 
@@ -168,8 +199,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5423");
+            chain.setClassroom("3425");
             chain.setSubject(subjectTSOS);
+            chain.setTeacher("Середа А.И.");
             chainRepository.save(chain);
         }
 
@@ -178,8 +210,9 @@ public class MongoInitializer {
         if (chainOptional.isPresent()) {
             Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("5421");
+            chain.setClassroom("5427");
             chain.setSubject(subjectMarket);
+            chain.setTeacher("Фомина И.Г.");
             chainRepository.save(chain);
         }
 
@@ -190,6 +223,7 @@ public class MongoInitializer {
             chainRepository.delete(chain);
             chain.setClassroom("3423");
             chain.setSubject(subjectMarketPract);
+            chain.setTeacher("Петрова А.К.");
             chainRepository.save(chain);
         }
 
@@ -200,6 +234,7 @@ public class MongoInitializer {
             chainRepository.delete(chain);
             chain.setClassroom("1234");
             chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
             chainRepository.save(chain);
         }
 
@@ -210,6 +245,7 @@ public class MongoInitializer {
             chainRepository.delete(chain);
             chain.setClassroom("3129");
             chain.setSubject(subjectCryptPract);
+            chain.setTeacher("Племянников А.К.");
             chainRepository.save(chain);
         }
 
@@ -220,39 +256,506 @@ public class MongoInitializer {
             chainRepository.delete(chain);
             chain.setClassroom("3234");
             chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Трусов А.О.");
             chainRepository.save(chain);
         }
 
-        Optional<Chain> chain2 = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+//        0381 week schedule
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
                 MONDAY, THIRD_PAIR, group0381.getGroupNumber());
-
-        if (chain2.isPresent()) {
-            Chain chain = chain2.get();
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("1235");
-            chain.setSubject(subjectCrypt);
+            chain.setClassroom("5423");
+            chain.setSubject(subjectBZD);
+            chain.setTeacher("Иванов А.Н.");
             chainRepository.save(chain);
         }
 
-        Optional<Chain> chain3 = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
-                MONDAY, THIRD_PAIR, group0383.getGroupNumber());
-
-        if (chain3.isPresent()) {
-            Chain chain = chain3.get();
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FORTH_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
             chainRepository.delete(chain);
-            chain.setClassroom("1232");
-            chain.setSubject(subjectOPNP);
-            chainRepository.save(chain);
-        }
-
-        Optional<Chain> chain4 = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
-                MONDAY, FORTH_PAIR, group0383.getGroupNumber());
-
-        if (chain4.isPresent()) {
-            Chain chain = chain4.get();
-            chainRepository.delete(chain);
-            chain.setClassroom("5328");
+            chain.setClassroom("5230");
             chain.setSubject(subjectNoSQL);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FIFTH_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectOPNP);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FIFTH_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3425");
+            chain.setSubject(subjectTSOS);
+            chain.setTeacher("Середа А.И.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, SECOND_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5427");
+            chain.setSubject(subjectMarket);
+            chain.setTeacher("Фомина И.Г.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, THIRD_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("1229");
+            chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, FORTH_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5141");
+            chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Трусов А.А.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, FIFTH_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2404");
+            chain.setSubject(subjectMarketPract);
+            chain.setTeacher("Петрова А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, SECOND_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5135");
+            chain.setSubject(subjectBZDLab);
+            chain.setTeacher("Маловский А.И.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, THIRD_PAIR, group0381.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2113");
+            chain.setSubject(subjectCryptPract);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+//        0383 week schedule
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, THIRD_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5423");
+            chain.setSubject(subjectBZD);
+            chain.setTeacher("Иванов А.Н.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FORTH_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectNoSQL);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FIFTH_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectOPNP);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, SECOND_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5135");
+            chain.setSubject(subjectBZDLab);
+            chain.setTeacher("Демидович О.В.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, THIRD_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2113");
+            chain.setSubject(subjectCryptPract);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FORTH_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2412");
+            chain.setSubject(subjectMarketPract);
+            chain.setTeacher("Чешуина Е.Ю.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FIFTH_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3425");
+            chain.setSubject(subjectTSOS);
+            chain.setTeacher("Середа А.И.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, SECOND_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5427");
+            chain.setSubject(subjectMarket);
+            chain.setTeacher("Фомина И.Г.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, THIRD_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("1229");
+            chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, THIRD_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5141");
+            chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Смирнова Н.В.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, THIRD_PAIR, group0383.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5141");
+            chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Смирнова Н.В.");
+            chainRepository.save(chain);
+        }
+
+//        0303 week schedule
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, THIRD_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5423");
+            chain.setSubject(subjectBZD);
+            chain.setTeacher("Иванов А.Н.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FORTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectNoSQL);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FIFTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectOPNP);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, SIXTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3410");
+            chain.setSubject(subjectPRCMI);
+            chain.setTeacher("Калишенко Е.Л.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, SECOND_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3410");
+            chain.setSubject(subjectPRCMIPract);
+            chain.setTeacher("Яцык А.А.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, THIRD_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2113");
+            chain.setSubject(subjectCryptPract);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FORTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5135");
+            chain.setSubject(subjectBZDLab);
+            chain.setTeacher("Демидович О.В.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FIFTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5134");
+            chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Трусов А.А.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, SIXTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3425");
+            chain.setSubject(subjectTSOS);
+            chain.setTeacher("Середа А.И.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, SECOND_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5427");
+            chain.setSubject(subjectMarket);
+            chain.setTeacher("Фомина И.Г.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, THIRD_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("1229");
+            chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, FORTH_PAIR, group0303.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2404");
+            chain.setSubject(subjectMarketPract);
+            chain.setTeacher("Петрова А.К.");
+            chainRepository.save(chain);
+        }
+
+//        0303 week schedule
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, THIRD_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5423");
+            chain.setSubject(subjectBZD);
+            chain.setTeacher("Иванов А.Н.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FORTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectNoSQL);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, FIFTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5230");
+            chain.setSubject(subjectOPNP);
+            chain.setTeacher("Заславский М.М.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                MONDAY, SIXTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3410");
+            chain.setSubject(subjectPRCMI);
+            chain.setTeacher("Калишенко Е.Л.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, FIFTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3410");
+            chain.setSubject(subjectPRCMIPract);
+            chain.setTeacher("Яцык А.А.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                TUESDAY, SIXTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("3425");
+            chain.setSubject(subjectTSOS);
+            chain.setTeacher("Середа А.И.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, SECOND_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5427");
+            chain.setSubject(subjectMarket);
+            chain.setTeacher("Фомина И.Г.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, THIRD_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("1229");
+            chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, FORTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5134");
+            chain.setSubject(subjectBZDPract);
+            chain.setTeacher("Смирнова Н.В.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                WEDNESDAY, FIFTH_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2404");
+            chain.setSubject(subjectMarketPract);
+            chain.setTeacher("Петрова А.К.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, SECOND_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("5135");
+            chain.setSubject(subjectBZDLab);
+            chain.setTeacher("Демидович О.В.");
+            chainRepository.save(chain);
+        }
+
+        chainOptional = chainRepository.findChainByWeekDayAndTimeAndGroup_GroupNumber(
+                THURSDAY, THIRD_PAIR, group0304.getGroupNumber());
+        if (chainOptional.isPresent()) {
+            Chain chain = chainOptional.get();
+            chainRepository.delete(chain);
+            chain.setClassroom("2113");
+            chain.setSubject(subjectCrypt);
+            chain.setTeacher("Племянников А.К.");
             chainRepository.save(chain);
         }
     }

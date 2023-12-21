@@ -29,9 +29,4 @@ public class AuthController {
     public ResponseEntity<UserDto> register(@RequestBody RegisterRequest registerRequest) {
         return ResponseEntity.ok(authService.registerUser(registerRequest));
     }
-
-    @GetMapping("/sayHello")
-    public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("NOT OKAY");
-    }
 }

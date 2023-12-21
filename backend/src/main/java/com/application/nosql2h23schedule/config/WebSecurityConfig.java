@@ -88,10 +88,6 @@ public class WebSecurityConfig {
                 "http://localhost:8080", "http://localhost:8081"
         ));
         configuration.setAllowedHeaders(List.of("*"));
-////        configuration.setAllowedHeaders(List.of("Accept", "Access-Control-Request-Method",
-////                "Access-Control-Request-Headers",  "Accept-Language", "Authorization",
-////                "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
-////                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

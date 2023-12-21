@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GetScheduleRequest {
+public class ScheduleRequest {
     private String faculty;
     private int course;
+    private String teacher;
 }
