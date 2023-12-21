@@ -44,9 +44,8 @@ public class AdminService {
         }
 
         List<String> weekDay = new ArrayList<>(Arrays.asList(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
-        List<String> time = new ArrayList<>(Arrays.asList(FIFTH_PAIR, SECOND_PAIR, THIRD_PAIR,
+        List<String> time = new ArrayList<>(Arrays.asList(FIRST_PAIR, SECOND_PAIR, THIRD_PAIR,
                 FORTH_PAIR, FIFTH_PAIR, SIXTH_PAIR));
-
 
         List<Map<String, Object>> chainsJSON = new ArrayList<>();
         weekDay.forEach(day ->
