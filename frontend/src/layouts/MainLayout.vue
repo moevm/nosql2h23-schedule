@@ -79,9 +79,11 @@
     </v-navigation-drawer>
 
     <v-main class="d-flex flex-column align-center justify-center">
-      <router-view/>
+      <div class="main-background pa-5 pb-6 w-100">
+        <router-view/>
+      </div>
 
-      <v-footer class="w-100 h-10 border">
+      <v-footer class="w-100 border justify-end">
         <v-row justify="center" no-gutters>
           <v-col class="text-center" cols="12" style="color: #99989F;">
             Проект по нереляционным СУБД. 2023{{ new Date().getFullYear() !== 2023 ? ' - ' + new Date().getFullYear() : '' }}. <strong>SmartScheduler</strong>
@@ -96,29 +98,31 @@
     setup
     lang="ts"
 >
-import {useRouter} from "vue-router";
 import { onMounted, ref } from 'vue';
 import { LocalStorageKeys } from '@/components/auth/model/localStorageKeys';
 import { VNavigationDrawer } from 'vuetify/components';
+import auth from '@/components/auth/api/Auth';
 
 const userFio = ref('');
 const userName = ref('');
 
-const router = useRouter();
-const logout = () => {
-  router.push({name: 'auth'});
+const logout = async () => {
+  await auth.logout();
 }
 
 const isMenuHovering = ref(false);
 
 onMounted(() => {
-  userFio.value = localStorage.getItem(LocalStorageKeys.FIO_KEY) || '';
-  userName.value = localStorage.getItem(LocalStorageKeys.USERNAME_KEY) || '';
+  userFio.value = localStorage.getItem(LocalStorageKeys.FIO_KEY) || 'userFullname';
+  userName.value = localStorage.getItem(LocalStorageKeys.USERNAME_KEY) || 'user_email@mail.ru';
 })
 </script>
 
 <style scoped>
 .bottom-bordered{
   border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
+}
+.main-background {
+  background-color: #F2F5F9;
 }
 </style>
