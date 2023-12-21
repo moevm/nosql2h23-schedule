@@ -85,3 +85,16 @@ label {
 }
 
 /* common styles*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #50505025	;
+    border-radius: 100px;
+}
