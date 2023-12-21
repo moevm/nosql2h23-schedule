@@ -1,6 +1,7 @@
 package com.application.nosql2h23schedule.controller;
 
 import com.application.nosql2h23schedule.domain.Chain;
+import com.application.nosql2h23schedule.request.GetScheduleRequest;
 import com.application.nosql2h23schedule.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,9 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/getSchedule")
-    public ResponseEntity<Map<String, Object>> getSchedule(@RequestParam("faculty") String faculty,
-                                                           @RequestParam("course") int course) {
-        return ResponseEntity.ok(adminService.getSchedule(faculty, course));
+    @PostMapping("/getSchedule")
+    public ResponseEntity<Map<String, Object>> getSchedule(@RequestBody GetScheduleRequest getScheduleRequest) {
+        return ResponseEntity.ok(adminService.getSchedule(getScheduleRequest.getFaculty(), getScheduleRequest.getCourse()));
     }
 
 //    example to deal with ObjectId
