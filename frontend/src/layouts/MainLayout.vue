@@ -12,18 +12,19 @@
     <v-navigation-drawer
       expand-on-hover
       rail
+      ref="navMenu"
     >
       <v-list>
         <v-list-item
-            title="Sandra Adams"
-            subtitle="sandra_a88@gmailcom"
+            :title="userFio"
+            :subtitle="userName"
             class="px-3 py-4"
         >
           <template v-slot:prepend>
             <v-icon
                 icon="mdi-account-circle-outline"
-                size="x-large"
                 color="#2962FF"
+                size="x-large"
             ></v-icon>
           </template>
         </v-list-item>
@@ -31,32 +32,45 @@
 
       <v-divider></v-divider>
 
-      <v-list density="compact" nav>
-        <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-        <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+      <v-list density="comfortable" nav>
+        <v-list-item prepend-icon="mdi-table-clock" title="Просмотр расписания" value="schedule" rounded="xl"></v-list-item>
+        <v-list-item prepend-icon="mdi-office-building-cog-outline" title="Генерация расписания" value="generation" rounded="xl"></v-list-item>
       </v-list>
 
       <template v-slot:append>
-        <div class="d-flex flex-column mb-4">
-          <v-list-item
-              rounded
-              title="Выйти"
-              @click="logout"
-          >
-            <template v-slot:prepend>
-              <v-icon
-                  icon="mdi-logout"
-                  color="#2962FF"
-              ></v-icon>
-            </template>
-          </v-list-item>
+        <div class="d-flex flex-column">
+          <v-list>
+            <v-list-item
+                class="py-3"
+                color="primary"
+                rounded="xl"
+                @click="logout"
+            >
+              <v-list-item-title class="ml-3 font-weight-bold">Выйти</v-list-item-title>
+              <template #prepend>
+                <v-icon
+                    class="ml-3"
+                    icon="mdi-logout"
+                    color="№2962FF"
+                ></v-icon>
+              </template>
+
+            </v-list-item>
+          </v-list>
         </div>
       </template>
     </v-navigation-drawer>
 
-    <v-main class="d-flex align-center justify-center">
+    <v-main class="d-flex flex-column align-center justify-center">
       <router-view/>
+
+      <v-footer class="w-100 h-10 border">
+        <v-row justify="center" no-gutters>
+          <v-col class="text-center" cols="12" style="color: #99989F;">
+            Проект по нереляционным СУБД. 2023{{ new Date().getFullYear() !== 2023 ? ' - ' + new Date().getFullYear() : '' }}. <strong>SmartScheduler</strong>
+          </v-col>
+        </v-row>
+      </v-footer>
     </v-main>
   </v-layout>
 </template>
@@ -66,11 +80,22 @@
     lang="ts"
 >
 import {useRouter} from "vue-router";
+import { onMounted, ref } from 'vue';
+import { LocalStorageKeys } from '@/components/auth/model/localStorageKeys';
+
+const userFio = ref('');
+const userName = ref('');
 
 const router = useRouter();
 const logout = () => {
   router.push({name: 'auth'});
 }
+const navMenu = ref
+
+onMounted(() => {
+  userFio.value = localStorage.getItem(LocalStorageKeys.FIO_KEY) || '';
+  userName.value = localStorage.getItem(LocalStorageKeys.USERNAME_KEY) || '';
+})
 </script>
 
 <style scoped>
