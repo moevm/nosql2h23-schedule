@@ -109,7 +109,7 @@ public class MongoInitializer {
         List<String> dayOfWeek = new ArrayList<>(Arrays.asList(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
         List<String> time = new ArrayList<>(Arrays.asList(FIRST_PAIR, SECOND_PAIR, THIRD_PAIR,
                 FORTH_PAIR, FIFTH_PAIR, SIXTH_PAIR));
-        List<Group> groups = new ArrayList<>(Arrays.asList(group0381, group0382, group0383, group0303, group0303));
+        List<Group> groups = new ArrayList<>(Arrays.asList(group0381, group0382, group0383, group0303, group0304));
 
         dayOfWeek.forEach(day -> time.forEach(t -> groups.forEach(group ->
                 {
