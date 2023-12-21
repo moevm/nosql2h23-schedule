@@ -49,7 +49,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import type { VForm } from 'vuetify';
+import  type { VForm } from 'vuetify/components';
 import loginValidationRules from '@/components/auth/model/loginValidation';
 import LoginData from '@/components/auth/model/loginData';
 import auth from '@/components/auth/api/Auth';
@@ -59,18 +59,22 @@ const emit = defineEmits(['login-success']);
 const showPassword = ref(false);
 const loginFormRef = ref<VForm | null>(null);
 const loginInputData = reactive(new LoginData());
+const isLoginLoading = ref(false);
 
 const onClickToggleShowPassword = () => {
   showPassword.value = !showPassword.value;
 };
 
 const onClickSubmitLogin = async () => {
+  isLoginLoading.value = true;
   await auth.sendLoginData(loginInputData)
       .then(() => {
         emit('login-success');
+        isLoginLoading.value = false;
       })
       .catch((resStatus) => {
-        console.log(resStatus)
+        console.log(resStatus);
+        isLoginLoading.value = false;
       });
 };
 </script>

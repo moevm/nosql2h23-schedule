@@ -42,14 +42,14 @@ class Auth {
       // по дефолту с сервера приходит 200,
       // но внутри обертки в теле ответа - поле status
       try {
-        //const response = await axiosApiInstance.post('https://run.mocky.io/v3/840f1fe8-e015-49b9-b95d-a2079321a660', {
+        //const response = await axiosApiInstance.post('https://run.mocky.io/v3/030c10c8-fba7-4ae5-baf8-f98e26d37842', {
         const response = await axiosApiInstance.post('/auth/login', {
           ...loginInputData,
         });
         if (response.status !== 200) {
           return Promise.reject(response.status);
         }
-        if (response.data.token_access) {
+        if (response.data.email) {
           this.profile.setUserInfo(response.data.role, response.data.fullName);
           localStorage.setItem(LocalStorageKeys.FIO_KEY, response.data.fullName);
           localStorage.setItem(LocalStorageKeys.ROLE_KEY, response.data.role);
