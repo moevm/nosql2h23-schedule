@@ -42,10 +42,9 @@ public class WebSecurityConfig {
                 http
                         .csrf().disable()
                         .authorizeRequests()
-//                        .antMatchers("/project/admin/*").hasRole("ADMIN")
+                        .antMatchers("/schedule/admin/*").hasRole("ADMIN")
                         .antMatchers("/schedule/auth/login").permitAll()
                         .antMatchers("/schedule/auth/register").permitAll()
-                        .antMatchers("/schedule/admin/*").hasRole("ADMIN")
                         .anyRequest().hasAnyRole("ADMIN")
                         .and()
                         .formLogin().loginPage("/schedule/auth/login")
@@ -83,9 +82,13 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-        configuration.setAllowedHeaders(List.of("Accept", "Access-Control-Request-Method", "Access-Control-Request-Headers",
-                "Accept-Language", "Authorization", "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
-                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
+
+//        configuration.setAllowedHeaders(List.of("Accept", "Access-Control-Request-Method",
+//                "Access-Control-Request-Headers",  "Accept-Language", "Authorization",
+//                "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
+//                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("*"));
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:8080", "http://localhost:8081"
         ));
