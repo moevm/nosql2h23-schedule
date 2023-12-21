@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @EnableWebSecurity
@@ -40,6 +41,7 @@ public class WebSecurityConfig {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         return
                 http
+                        .cors().and()
                         .csrf().disable()
                         .authorizeRequests()
                         .antMatchers("/schedule/admin/*").hasRole("ADMIN")
@@ -81,18 +83,25 @@ public class WebSecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-
-//        configuration.setAllowedHeaders(List.of("Accept", "Access-Control-Request-Method",
-//                "Access-Control-Request-Headers",  "Accept-Language", "Authorization",
-//                "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
-//                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setExposedHeaders(List.of("*"));
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:8080", "http://localhost:8081"
-        ));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+//        CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+//
+////        configuration.setAllowedHeaders(List.of("Accept", "Access-Control-Request-Method",
+////                "Access-Control-Request-Headers",  "Accept-Language", "Authorization",
+////                "Content-Type", "Request-Name", "Request-Surname", "Origin", "X-Request-AppVersion",
+////                "X-Request-OsVersion", "X-Request-Device", "X-Requested-With"));
+//        configuration.setAllowedHeaders(List.of("*"));
+//        configuration.setExposedHeaders(List.of("*"));
+//        configuration.setAllowedOrigins(List.of(
+//                "http://localhost:8080", "http://localhost:8081"
+//        ));
+//        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
