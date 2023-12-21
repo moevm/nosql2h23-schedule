@@ -7,7 +7,7 @@ import router from '@/router/index';
 
 class Auth {
   private tokens = {
-    access_token: '',
+    token_access: '',
   };
 
   profile = profile;
@@ -25,13 +25,13 @@ class Auth {
   }
 
   updateTokens(newAccessToken: string) {
-    this.tokens.access_token = newAccessToken;
+    this.tokens.token_access = newAccessToken;
     localStorage.setItem(LocalStorageKeys.TOKENS_KEY, JSON.stringify(this.tokens));
   }
 
   tokensClean() {
     localStorage.removeItem(LocalStorageKeys.TOKENS_KEY);
-    this.tokens.access_token = '';
+    this.tokens.token_access = '';
   }
 
   // @ts-ignore
