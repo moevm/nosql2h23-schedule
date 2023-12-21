@@ -12,7 +12,8 @@
     <v-navigation-drawer
       expand-on-hover
       rail
-      ref="navMenu"
+      @update:rail="isMenuHovering=!isMenuHovering"
+      width="270"
     >
       <v-list>
         <v-list-item
@@ -34,11 +35,28 @@
 
       <v-list density="comfortable" nav>
         <v-list-item prepend-icon="mdi-table-clock" title="Просмотр расписания" value="schedule" rounded="xl"></v-list-item>
-        <v-list-item prepend-icon="mdi-office-building-cog-outline" title="Генерация расписания" value="generation" rounded="xl"></v-list-item>
+<!--        <v-list-item prepend-icon="mdi-office-building-cog-outline" title="Генерация расписания" value="generation" rounded="xl"></v-list-item>-->
       </v-list>
 
-      <template v-slot:append>
-        <div class="d-flex flex-column">
+      <template #append>
+        <template v-if="isMenuHovering">
+          <v-btn
+              class="pa-3 w-100 mb-3 d-flex align-center justify-center"
+              variant="flat"
+              color="#255ED6"
+              rounded="xl"
+              @click="logout"
+          >
+            <template #prepend>
+              <v-icon
+                  icon="mdi-logout"
+              ></v-icon>
+            </template>
+            Выйти
+          </v-btn>
+        </template>
+
+        <template v-else>
           <v-list>
             <v-list-item
                 class="py-3"
@@ -46,18 +64,17 @@
                 rounded="xl"
                 @click="logout"
             >
-              <v-list-item-title class="ml-3 font-weight-bold">Выйти</v-list-item-title>
               <template #prepend>
                 <v-icon
-                    class="ml-3"
                     icon="mdi-logout"
-                    color="№2962FF"
+                    color="#2962FF"
                 ></v-icon>
               </template>
 
             </v-list-item>
           </v-list>
-        </div>
+        </template>
+
       </template>
     </v-navigation-drawer>
 
@@ -82,6 +99,7 @@
 import {useRouter} from "vue-router";
 import { onMounted, ref } from 'vue';
 import { LocalStorageKeys } from '@/components/auth/model/localStorageKeys';
+import { VNavigationDrawer } from 'vuetify/components';
 
 const userFio = ref('');
 const userName = ref('');
@@ -90,7 +108,8 @@ const router = useRouter();
 const logout = () => {
   router.push({name: 'auth'});
 }
-const navMenu = ref
+
+const isMenuHovering = ref(false);
 
 onMounted(() => {
   userFio.value = localStorage.getItem(LocalStorageKeys.FIO_KEY) || '';
