@@ -18,9 +18,9 @@
       <v-list>
         <v-list-item
             :title="userFio"
-            :subtitle="userName"
             class="px-3 py-4"
         >
+          <v-list-item-subtitle class="text-decoration-underline">{{userName}}</v-list-item-subtitle>
           <template v-slot:prepend>
             <v-icon
                 icon="mdi-account-circle-outline"
@@ -34,8 +34,7 @@
       <v-divider></v-divider>
 
       <v-list density="comfortable" nav>
-        <v-list-item prepend-icon="mdi-table-clock" title="Просмотр расписания" value="schedule" rounded="xl"></v-list-item>
-<!--        <v-list-item prepend-icon="mdi-office-building-cog-outline" title="Генерация расписания" value="generation" rounded="xl"></v-list-item>-->
+        <v-list-item prepend-icon="mdi-table-clock" title="Просмотр расписания" value="schedule" rounded="xl" active></v-list-item>
       </v-list>
 
       <template #append>
