@@ -18,3 +18,4 @@
 <a href=" ./../../../actions/workflows/7_app_is_ready.yml" >![7. App is ready]( ./../../actions/workflows/7_app_is_ready.yml/badge.svg)</a>
 
 ## Готовность проекта: Прототип хранение и представление
+## Технологии: Java Spring + Vue 3 + JS/TS + Vuetify
