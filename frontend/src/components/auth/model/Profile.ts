@@ -1,4 +1,5 @@
 import LoginData from '@/components/auth/model/loginData';
+import { LocalStorageKeys } from '@/components/auth/model/localStorageKeys';
 
 class Profile {
   loginData = new LoginData();
@@ -28,6 +29,9 @@ class Profile {
     this.loginData = new LoginData();
     this.role = '';
     this.fullName = '';
+    localStorage.removeItem(LocalStorageKeys.USERNAME_KEY);
+    localStorage.removeItem(LocalStorageKeys.FIO_KEY);
+    localStorage.removeItem(LocalStorageKeys.ROLE_KEY);
   }
 }
 
