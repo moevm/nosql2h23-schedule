@@ -1,8 +1,12 @@
 <template>
-  <v-card :loading="isLoginLoading">
-    <v-card-title class="text-center">Авторизация</v-card-title>
+  <v-card :loading="isLoginLoading" elevation="1" rounded="xl" class="px-5">
+<!--    <v-card-title class="text-center mt-3" style="color: #658de2;">Авторизация</v-card-title>-->
+    <div class="d-flex w-100 justify-center logo mt-16">
+      <img width="487" src="src/assets/full-logo.svg" alt="logo"/>
+    </div>
 
-    <v-card-text>
+
+    <v-card-text class="mx-7">
       <v-form
           ref="loginFormRef"
           data-testid="loginData-form"
@@ -14,7 +18,9 @@
             autocomplete="username"
             clearable
             label="Логин"
-            variant="underlined"
+            variant="outlined"
+            base-color="#658de2"
+            color="#658de2"
         />
         <v-text-field
             v-model="loginInputData.password"
@@ -23,8 +29,9 @@
             :type="showPassword ? 'text' : 'password'"
             autocomplete="current-password"
             label="Пароль"
-            variant="underlined"
+            variant="outlined"
             @click:append="onClickToggleShowPassword"
+            color="#658de2"
         />
 
         <v-btn
@@ -35,10 +42,11 @@
           "
             :loading="isLoginLoading"
             block
-            class="mt-4"
-            color="themeColor"
+            class="mt-4 mb-6 py-5"
+            color="#658de2"
             data-testid="submit-button"
             type="submit"
+            rounded="lg"
         >
           Войти
         </v-btn>
@@ -78,3 +86,9 @@ const onClickSubmitLogin = async () => {
       });
 };
 </script>
+
+<style scoped>
+:deep(.v-input) {
+  color: #255ED6 !important;
+}
+</style>
