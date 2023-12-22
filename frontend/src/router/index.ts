@@ -12,6 +12,10 @@ const router = createRouter({
       name: 'layout',
       children: [
         {
+          path: '',
+          redirect: {name: 'auth'}
+        },
+        {
           path: '/schedule',
           name: 'schedule',
           component: ScheduleView,
